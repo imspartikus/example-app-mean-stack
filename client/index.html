@@ -1,0 +1,88 @@
+<!doctype html>
+<!-- Declares theShepardApp as the starting Angular module -->
+<html class="no-js" ng-app="theShepardApp">
+<head>
+    <meta charset="utf-8">
+    <title>The Shepard</title>
+    <meta name="description" content="The Shepard Watches his sheep">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="style.css"/>
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrn605l7RPadiwdzsOlRw9O28lxfYBJ6s"></script>
+
+    <!-- JS Source -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
+
+    <script src="/bower_components/moment/min/moment.min.js"></script> <!-- date picker -->
+ 
+ <!-- Angular Files -->
+    
+    <script src="/js/gservice.js"></script>
+    <script src="/controllers/queryCtrl.js"></script>
+    <script src="/controllers/headerCtrl.js"></script>
+    <script src="/controllers/loginCtrl.js"></script>
+    <script src="/controllers/logoutCtrl.js"></script>
+    <script src="/controllers/registerCtrl.js"></script>   
+    <script src="/controllers/pollCtrl.js"></script>
+    
+    <!-- for date range -->
+    <script src="/js/daterangepicker.js"></script>
+    
+    <script src="/js/main.js"></script>
+    <script src="/js/services.js"></script>
+    
+
+
+<!-- Modernizr -->
+<!-- this is throwing errors and not loading correctly -->
+   <!-- <script src="../bower_components/modernizr/bin/modernizr"></script> -->
+
+</head>
+<body>
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div class="container">
+    <!-- Header Menu. Note use of headerCtrl -->
+    <div class="header" ng-controller="headerCtrl">
+
+        <!-- Header items are made active upon selection -->
+        <ul class="nav nav-pills pull-right">
+            <a ng-click='logout()' class="btn btn-primary">Logout</a>
+        </ul>
+
+        <!-- Header Title -->
+        <img ng-src="{{image[0].header}}" class="header-logo"/> <span class="h3">- The Shepard App</span>
+    </div>
+
+    <!-- Map and Side Panel -->
+    <div class="row content">
+        <!-- Side Panel (Controlled by ng-view) -->
+        <div ng-view></div>
+        
+    </div>
+    <hr/>
+    <div>
+        <div ng-controller="pollCtrl">
+            <div data-chart data-value="value"></div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+        <p class="text-center"><span class="glyphicon glyphicon-check"></span> TheShepard -
+            <a href="http://www.geoshepard.com">GeoShepard</a> </p>
+    </div>
+
+</div>
+
+</body>
+</html>

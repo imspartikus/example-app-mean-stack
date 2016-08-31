@@ -1,0 +1,90 @@
+<!--date range -->
+<script type="text/javascript">
+                $(function() {
+                    $('input[name="daterange"]').daterangepicker({
+                        timePicker: true,
+                        timePickerIncrement: 15,
+                        locale: {
+                            format: 'MM/DD/YYYY h:mm A'
+                        }
+                    });
+                });
+                $('#daterange').on('apply.daterangepicker', function(ev, picker) {
+                    console.log(picker.startDate.format('YYYY-MM-DD'));
+                    console.log(picker.endDate.format('YYYY-MM-DD'));
+                    $scope.startDate = picker.startDate;
+                });
+</script>
+<!-- (Query) Form -->
+<div class="col-md-5">
+
+    <!-- Creates Main Panel -->
+    <div class="panel panel-default">
+
+        <!-- Panel Title -->
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">Find Previous Transports <span class="glyphicon glyphicon-search"></span></h2>
+        </div>
+
+        <!-- Panel Body -->
+        <div class="panel-body">
+
+            <!-- Creates Form -->
+            <form name ="queryForm">
+                <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
+                <div class="form-group">
+                    <label for="daterange">Date and Time Range</label>
+                    <input type="text" class="form-control" id="daterange" name="daterange" value="01/01/2016 1:30 PM - 01/02/2016 2:00 PM" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="transporterName">Transporter Name (aka - Phone Id)</label>
+                    <input type="text" class="form-control" id="transporterName"  ng-model="formData.transporterName">
+                </div>
+
+                <div class="form-group">
+                    <label for="shipmentId">Shipment Id (aka - Beacon Id)</label>
+                    <input type="text" class="form-control" id="shipmentId"  ng-model="formData.shipmentId">
+                </div>
+                <div class="form-group">
+                    <a href="javascript:;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                        Advanced Search
+                    </a>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="form-group">
+                        <label for="latitude">Your Latitude (or click the map to set)</label>
+                        <input type="text" class="form-control" id="latitude"  ng-model="formData.latitude" >
+                    </div>
+                    <div class="form-group">
+                        <label for="longitude">Your Longitude (or click the map to set)</label>
+                        <input type="text" class="form-control" id="longitude"  ng-model="formData.longitude">
+                    </div>
+                    <div class="form-group">
+                        <label for="distance">Max. Distance (miles)</label>
+                        <input type="text" class="form-control" id="distance" ng-model="formData.distance">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!-- Query button. Note that its tied to queryPoints() function from queryCtrl.  -->
+                    <button type="submit" class="btn btn-danger btn-block" ng-click="queryPoints()">Search</button>
+                </div>
+                <div class="form-group">
+                    <!-- Query button. Note that its tied to queryEverything() function from queryCtrl.  -->
+                    <button type="submit" class="btn btn-danger btn-block" ng-click="queryEverything()">Show Me Everything</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Footer panel for displaying count. Note how it will only display if queryCount is greater than 0 -->
+        <div ng-show="queryCount>0 || postQuery" class="panel-footer">
+                <p class="text-center"> We Found {{queryCount}} points.</p>
+        </div>
+    </div>
+</div>
+
+<div id="mapArea" >
+    <div class="col-md-7" id="mapDiv">
+        <div id="map"></div>
+    </div>
+</div>

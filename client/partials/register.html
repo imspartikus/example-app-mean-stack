@@ -1,0 +1,25 @@
+<div class="col-md-4">
+  <h1>Register</h1>
+  <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
+  <form class="form" ng-submit="register()">
+    <div class="form-group">
+      <label>User Key Provided by Geoshepard</label>
+      <input type="text" class="form-control" name="userkey" ng-model="registerForm.userkey" required/>
+    </div>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" class="form-control" name="username" ng-model="registerForm.username" required/>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" name="password" ng-model="registerForm.password" required/>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-default" ng-disabled="disabled">Register</button>
+    </div>
+    <div class="form-group">
+        <label>Having Trouble?</label>
+        <a href="mailto:geoshepard@geoshepard.com?Subject=Trouble%20Registering%20Geoshepard%20Site" target="_top">Send Us an E-Mail</a>
+    </div>
+  </form>
+</div>
